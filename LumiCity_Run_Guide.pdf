@@ -1,0 +1,169 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 2 /Kids [4 0 R 6 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2341 >>
+stream
+BT
+/F1 12 Tf
+50 790 Td
+16 TL
+(LumiCity Run Guide) Tj
+T*
+() Tj
+T*
+(Overview) Tj
+T*
+(LumiCity is a Streamlit application for smart street light monitoring, prediction,) Tj
+T*
+(camera-based traffic response, and light intensity analysis. This project folder also) Tj
+T*
+(includes a Jupyter notebook used for the model-building and analysis workflow.) Tj
+T*
+() Tj
+T*
+(Files to copy to another device) Tj
+T*
+(Copy the full project folder so these files stay together: app.py, credentials.json,) Tj
+T*
+(kerala_smart_lights.db, intensity_model.pkl, intensity_scaler.pkl, yolov8n.pt,) Tj
+T*
+(requirements.txt, requirement.txt, and LumiCity_Step_by_Step_Analysis.ipynb if you want) Tj
+T*
+(the notebook too.) Tj
+T*
+() Tj
+T*
+(System requirements) Tj
+T*
+(Windows is the safest target because the app uses cv2.CAP_DSHOW for camera access.) Tj
+T*
+(Install Python 3.10 to 3.13 and make sure pip is available. A webcam is only needed for) Tj
+T*
+(the Camera Surveillance tab.) Tj
+T*
+() Tj
+T*
+(Environment setup) Tj
+T*
+(1. Open a terminal inside the project folder.) Tj
+T*
+(2. Create a virtual environment: python -m venv .venv) Tj
+T*
+(3. Activate it on PowerShell: .venv\\Scripts\\Activate.ps1) Tj
+T*
+(4. Upgrade pip: python -m pip install --upgrade pip) Tj
+T*
+(5. Install dependencies: pip install -r requirements.txt) Tj
+T*
+(   You can also use requirement.txt because it contains the same package list.) Tj
+T*
+() Tj
+T*
+(Run the application) Tj
+T*
+(Start the app with: streamlit run app.py) Tj
+T*
+(After Streamlit starts, open the local URL shown in the terminal, usually) Tj
+T*
+(http://localhost:8501.) Tj
+T*
+() Tj
+T*
+(What the app depends on at runtime) Tj
+T*
+(The app expects the SQLite database, model pickle files, YOLO weights file, and) Tj
+T*
+(credentials.json to be present in the same folder as app.py. If any of these are) Tj
+T*
+(missing, some features will fail or show empty data.) Tj
+T*
+() Tj
+T*
+(Internet access) Tj
+T*
+(Live weather and NASA VIIRS retrieval need internet access. If those services are) Tj
+T*
+(unavailable, the app may fall back to defaults or show stale data depending on the) Tj
+T*
+(workflow.) Tj
+T*
+() Tj
+T*
+(Notebook usage) Tj
+T*
+(If you want to open LumiCity_Step_by_Step_Analysis.ipynb, run: jupyter notebook or open) Tj
+T*
+(the notebook in VS Code after installing the same requirements. The notebook includes) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 854 >>
+stream
+BT
+/F1 12 Tf
+50 790 Td
+16 TL
+(training and data-preparation steps that produced the saved model artifacts.) Tj
+T*
+() Tj
+T*
+(Common issues) Tj
+T*
+(If Streamlit is not recognized, use: python -m streamlit run app.py) Tj
+T*
+(If the camera tab cannot access the webcam, close other apps using the camera and rerun) Tj
+T*
+(the app.) Tj
+T*
+(If YOLO downloads or model loading fail, confirm yolov8n.pt is present in the project) Tj
+T*
+(folder.) Tj
+T*
+(If package installation fails, retry after upgrading pip and verify the active) Tj
+T*
+(interpreter is the virtual environment.) Tj
+T*
+() Tj
+T*
+(Recommended quick check) Tj
+T*
+(After startup, verify the main dashboard opens, the map renders, analytics charts) Tj
+T*
+(appear, and image upload works. Camera access is optional but should be tested on the) Tj
+T*
+(target machine if that feature matters.) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000317 00000 n 
+0000002710 00000 n 
+0000002836 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+3741
+%%EOF

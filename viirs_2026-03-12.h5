@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>api/v2/content/archives - LAADS DAAC</title>
+    <meta name="WHEREAMI" content="ui-laads"/>
+    <meta charset="utf-8"/>
+    <meta name="orgcode" content="619"/>
+    <meta name="description" content="archive listing"/>
+  </head>
+  <body>
+    <table>
+<tr><th>Name</th><th>Type</th><th>Size</th>
+</tr>
+<tr>
+<td><a href="https://ladsweb.modaps.eosdis.nasa.gov/api/v2/content/archives/Science%20Domain/Atmosphere/">Atmosphere</a></td><td>Directory</td><td>0</td>
+</tr>
+<tr>
+<td><a href="https://ladsweb.modaps.eosdis.nasa.gov/api/v2/content/archives/Science%20Domain/Land/">Land</a></td><td>Directory</td><td>0</td>
+</tr>
+<tr>
+<td><a href="https://ladsweb.modaps.eosdis.nasa.gov/api/v2/content/archives/Science%20Domain/Level-0/">Level-0</a></td><td>Directory</td><td>0</td>
+</tr>
+<tr>
+<td><a href="https://ladsweb.modaps.eosdis.nasa.gov/api/v2/content/archives/Science%20Domain/Level-1/">Level-1</a></td><td>Directory</td><td>0</td>
+</tr>
+</table>
+
+  </body>
+</html>
