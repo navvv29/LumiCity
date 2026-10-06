@@ -88,48 +88,58 @@ The platform continuously seeks to **minimize illumination wattage** to protect 
 
 ## 🏛️ System Architecture
 
+
 ```mermaid
-flowchart TB
-    subgraph External_APIs [External Satellite & Atmospheric APIs]
-        NASA["🛰️ NASA LAADS DAAC<br/>VIIRS VNP46A1 Day/Night Band"]
-        Meteo["🌦️ Open-Meteo REST API<br/>Cloudcover & Visibility"]
-    end
+flowchart TD
 
-    subgraph Offline_ML [Offline Data Engineering & AI Training Pipeline]
-        Jupyter["📓 Jupyter Notebook (LumiCity_AI.ipynb)"]
-        NASA -->|HDF5 Granule Radiance| Jupyter
-        Meteo -->|Hourly Weather Metrics| Jupyter
-        Jupyter -->|Feature Engineering (10 Features)| Train["GBR Regressor Training<br/>(200 Trees, 6% Gaussian Noise)"]
-        Train --> ModelExport["💾 intensity_model.pkl<br/>💾 intensity_scaler.pkl"]
-    end
+    NASA["NASA VIIRS"]
+    METEO["Open Meteo Weather API"]
 
-    subgraph Relational_Core [Localized Edge Persistence - SQLite WAL Mode]
-        DB[("🗄️ kerala_smart_lights.db<br/>• street_lights (70 Nodes)<br/>• city_zones (8 Municipalities)<br/>• predictions (1,680 Rows)<br/>• weather_data & viirs_data<br/>• celebration_calendar<br/>• detection_events & override_events<br/>• model_metrics & system_log")]
-    end
+    JUPYTER["AI Training Notebook"]
+    TRAIN["GBR Model Training"]
+    MODEL["Intensity Model"]
+    SCALER["Intensity Scaler"]
 
-    subgraph Backend_Daemons [Asynchronous Background Threads]
-        DRW["🔄 DataRefreshWorker Daemon<br/>• 5h Weather Cycle<br/>• 24h Model Prediction Cycle"]
-        CW["🎥 CameraWorker Daemon<br/>• OpenCV VideoCapture (30fps)<br/>• YOLOv8n Tensor Inference<br/>• Thread-Safe Mutex (threading.Lock)<br/>• Throttled DB Writes (5.0s)"]
-    end
+    REFRESH["Data Refresh Worker"]
+    CAMERA["Camera Worker"]
 
-    subgraph Presentation [Streamlit Interactive Web Portal - app.py]
-        UI["🖥️ Modern Glassmorphism Dashboard"]
-        Tab1["🗺️ Tab 1: GIS Map & Intensity Cards"]
-        Tab2["📹 Tab 2: Live YOLO Stream & Override"]
-        Tab3["🔬 Tab 3: Light Pollution Profiler"]
-        Tab4["📈 Tab 4: Energy & CO2 Analytics"]
-        Tab5["📋 Tab 5: Civic Calendar & Logs"]
-    end
+    DB["SQLite Database"]
+    APP["Streamlit Dashboard"]
 
-    External_APIs <-->|REST & Streaming| DRW
-    ModelExport -->|Load at Startup| DRW
-    ModelExport -->|Load at Startup| UI
-    DRW <-->|Read / Write| DB
-    CW <-->|Throttled TRS Writes| DB
-    DB <-->|Direct SQL Bridges| UI
-    CW -.->|Real-time Snapshot| Tab2
-    UI --- Tab1 & Tab2 & Tab3 & Tab4 & Tab5
-```
+    MAP["GIS Map"]
+    LIVE["YOLO Live Detection"]
+    PROFILER["Light Pollution Profiler"]
+    ANALYTICS["Energy and CO2 Analytics"]
+    LOGS["Civic Calendar and Logs"]
+
+    NASA --> JUPYTER
+    METEO --> JUPYTER
+
+    JUPYTER --> TRAIN
+    TRAIN --> MODEL
+    TRAIN --> SCALER
+
+    NASA --> REFRESH
+    METEO --> REFRESH
+    MODEL --> REFRESH
+    SCALER --> REFRESH
+
+    REFRESH --> DB
+
+    CAMERA --> DB
+    CAMERA --> APP
+
+    MODEL --> APP
+    SCALER --> APP
+
+    DB --> APP
+    APP --> DB
+
+    APP --> MAP
+    APP --> LIVE
+    APP --> PROFILER
+    APP --> ANALYTICS
+    APP --> LOGS
 
 ---
 
