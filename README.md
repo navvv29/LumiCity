@@ -360,5 +360,5 @@ Comprehensive PDF documentation is included directly within the repository for a
 This project is licensed under the **MIT License**. Contributions, issues, and feature suggestions are welcome!
 
 <div align="center">
-  <sub>Engineered with precision for Kerala Municipal Corporations • Developed by <b>Navaneed P</b></sub>
+  <sub>Engineered with precision for Kerala Municipal Corporations • Developed by <b>Navaneed P, Saarishma Saji, Afeela Mariyam VV, Sooraj PN</b></sub>
 </div>
