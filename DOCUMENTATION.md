@@ -50,39 +50,39 @@ LumiCity operates through three concurrent, decoupled operational loops:
 
 ```mermaid
 flowchart TD
-    subgraph Offline_Pipeline [1. Offline AI Engineering Pipeline - Jupyter]
-        NASA[NASA LAADS DAAC - VIIRS VNP46A1] --> Agg[Data Aggregator]
-        Meteo[Open-Meteo REST API - Weather] --> Agg
-        Agg --> FE[Feature Engineering - 10 Dim Vector]
-        FE --> Target[Target Synthesis + 6% Gaussian Noise]
-        Target --> GBR[GradientBoostingRegressor 200 Trees]
-        GBR --> ModelExport[intensity_model.pkl & scaler.pkl]
+    subgraph Offline_Pipeline ["1. Offline AI Engineering Pipeline - Jupyter"]
+        NASA["NASA LAADS DAAC - VIIRS VNP46A1"] --> Agg["Data Aggregator"]
+        Meteo["Open-Meteo REST API - Weather"] --> Agg
+        Agg --> FE["Feature Engineering - 10 Dim Vector"]
+        FE --> Target["Target Synthesis + 6% Gaussian Noise"]
+        Target --> GBR["GradientBoostingRegressor 200 Trees"]
+        GBR --> ModelExport["intensity_model.pkl & scaler.pkl"]
     end
 
-    subgraph Storage [2. Persistent Relational Layer - SQLite WAL]
-        DB[(kerala_smart_lights.db)]
+    subgraph Storage ["2. Persistent Relational Layer - SQLite WAL"]
+        DB[("kerala_smart_lights.db")]
     end
 
-    subgraph Runtime_Application [3. Real-Time Application - Streamlit app.py]
-        ModelExport --> Loader[Streamlit Server Boot]
+    subgraph Runtime_Application ["3. Real-Time Application - Streamlit app.py"]
+        ModelExport --> Loader["Streamlit Server Boot"]
         Loader --> DB
         
-        subgraph Workers [Background Daemon Threads]
-            DRW[DataRefreshWorker: 5h WX / 24h Predictions]
-            CW[CameraWorker: OpenCV + YOLOv8n Edge Inference]
+        subgraph Workers ["Background Daemon Threads"]
+            DRW["DataRefreshWorker: 5h WX / 24h Predictions"]
+            CW["CameraWorker: OpenCV + YOLOv8n Edge Inference"]
         end
         
         DRW <-->|Periodic API Fetch & DB Write| DB
-        CW -->|TRS Kinetic Scoring| RAM_Lock[(threading.Lock Mutex)]
+        CW -->|TRS Kinetic Scoring| RAM_Lock["threading.Lock Mutex"]
         RAM_Lock -->|Throttled Write 5.0s| DB
         
-        subgraph Frontend [Interactive Glassmorphism UI]
-            Auth[SHA-256 Auth & City Switcher]
-            Map[Tab 1: Folium GIS Map & Intensity Cards]
-            Cam[Tab 2: Live YOLO Stream & Manual Override]
-            Img[Tab 3: Light Pollution Heatmap Profiler]
-            Analytics[Tab 4: Energy & CO2 Carbon Accounting]
-            Logs[Tab 5: Civic Calendar & Audit Logs]
+        subgraph Frontend ["Interactive Glassmorphism UI"]
+            Auth["SHA-256 Auth & City Switcher"]
+            Map["Tab 1: Folium GIS Map & Intensity Cards"]
+            Cam["Tab 2: Live YOLO Stream & Manual Override"]
+            Img["Tab 3: Light Pollution Heatmap Profiler"]
+            Analytics["Tab 4: Energy & CO2 Carbon Accounting"]
+            Logs["Tab 5: Civic Calendar & Audit Logs"]
         end
         
         DB --> Frontend
@@ -258,3 +258,4 @@ streamlit run app.py
 - **v1.0.0:** Initial Streamlit prototype with basic timer controls.
 - **v1.1.0:** Integrated NASA VIIRS VNP46A1 radiance data ingestion and Gradient Boosting ML regression.
 - **v1.2.0:** Integrated YOLOv8 edge computer vision, asynchronous daemon threads (`CameraWorker`, `DataRefreshWorker`), glassmorphism UI theme, and multi-city municipal authentication.
+- **v1.2.1:** Optimized Mermaid system architecture diagrams in `README.md` and `DOCUMENTATION.md` for GitHub parser compatibility and error-free rich rendering.

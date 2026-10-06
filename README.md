@@ -92,25 +92,25 @@ The platform continuously seeks to **minimize illumination wattage** to protect 
 ```mermaid
 flowchart TD
 
-    NASA["NASA VIIRS"]
-    METEO["Open Meteo Weather API"]
+    NASA["NASA VIIRS Telemetry"]
+    METEO["Open-Meteo Weather API"]
 
-    JUPYTER["AI Training Notebook"]
+    JUPYTER["AI Training Pipeline - Jupyter"]
     TRAIN["GBR Model Training"]
-    MODEL["Intensity Model"]
-    SCALER["Intensity Scaler"]
+    MODEL["intensity_model.pkl"]
+    SCALER["intensity_scaler.pkl"]
 
-    REFRESH["Data Refresh Worker"]
-    CAMERA["Camera Worker"]
+    REFRESH["Data Refresh Worker (Daemon)"]
+    CAMERA["Camera Worker (YOLOv8 Edge)"]
 
-    DB["SQLite Database"]
-    APP["Streamlit Dashboard"]
+    DB[("SQLite Database - WAL Mode")]
+    APP["Streamlit Dashboard (app.py)"]
 
-    MAP["GIS Map"]
-    LIVE["YOLO Live Detection"]
-    PROFILER["Light Pollution Profiler"]
-    ANALYTICS["Energy and CO2 Analytics"]
-    LOGS["Civic Calendar and Logs"]
+    MAP["Tab 1: GIS Map & Fixtures"]
+    LIVE["Tab 2: YOLO Live Feed & Override"]
+    PROFILER["Tab 3: Light Pollution Profiler"]
+    ANALYTICS["Tab 4: Energy & CO2 Analytics"]
+    LOGS["Tab 5: Civic Calendar & Logs"]
 
     NASA --> JUPYTER
     METEO --> JUPYTER
@@ -140,6 +140,7 @@ flowchart TD
     APP --> PROFILER
     APP --> ANALYTICS
     APP --> LOGS
+```
 
 ---
 
